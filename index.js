@@ -22,7 +22,9 @@ mongoose
 
 app.get("/",async(req,res)=>{
     const allUrls=await URL.find({});
-    const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    // const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    const baseUrl = process.env.BASE_URL || (req.protocol + '://' + req.get('host'));
+    const fullUrl = baseUrl + req.originalUrl;
     res.render('index',{
         allUrls:allUrls,
         fullUrl:fullUrl
@@ -34,12 +36,6 @@ app.post("/url", async(req, res) => {
     URL.create({
         originalUrl:body.originalUrl
     })
-    const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-    const allUrls=await URL.find({});
-    // res.render('index',{
-    //     allUrls:allUrls,
-    //     fullUrl:fullUrl
-    // });
     res.redirect("/");
 });
 
