@@ -127,6 +127,11 @@
         .fas.fa-search {
         font-size: 18px;
         }
+        td.original-url {
+            max-width: 300px; 
+            overflow-x: auto; 
+            white-space: nowrap; 
+        }
 
     </style>
 </head>
@@ -156,7 +161,7 @@
            <% allUrls.forEach((url,i)=>{ %>
                 <tr>
                     <td><%= i+1 %></td>
-                    <td><a href="<%= url.originalUrl %>" target="_blank"><%= url.originalUrl %></a></td>
+                    <td class="original-url"><a href="<%= url.originalUrl %>" target="_blank"><%= url.originalUrl %></a></td>
                     <td><a href="<%= url.shortUrl %>" target="_blank"><%= fullUrl%>/<%= url.shortUrl %></a></td>
                     <td><%=url.visitCount %></td>
                 </tr>
