@@ -4,7 +4,7 @@
       { "src": "index.js", "use": "@vercel/node" }
     ],
     "routes": [
-      { "handle": "filesystem" }
+      {  "src": "/url", "handle": "functions/url"  }
     ]
   }
   
