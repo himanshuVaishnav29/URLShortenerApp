@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: calc(100% - 82px); /* Adjusted for button width and margin */
+            margin-right: 10px;
+            padding: 10px 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+
+        .search-container {
+        display: flex;
+        width: 100%;
+        background-color: #f1f1f1;
+        border-radius: 5px;
+        overflow: hidden;
+        }
+
+        #searchInput {
+        padding: 10px 20px;
+        border: none;
+        font-size: 16px;
+        background-color: #f1f1f1; 
+        outline: none; 
+        width: 100%; 
+        transition: 0.3s ease-in-out; 
+        }
+
+        #searchInput:focus {
+        background-color: #fff; 
+        }
+
+        
+        button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 20px;
+        background-color: #4CAF50; 
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+        }
+
+        button:hover {
+        background-color: #3e8e41; 
+        }
+
+        .fas.fa-search {
+        font-size: 18px;
+        }
+
+    </style>
+</head>
+<body>
+    
+    
+    <h1>URL SHORTENER</h1>
+    
+    <form action="/url" method="POST">
+        <div class="search-container">
+            <input type="text" id="urlInputBox" name="originalUrl" placeholder="Enter URL" required>
+            <button type="submit"><i class="fas fa-search">SHRINK</i></button>
+      </div>
+    </form>
+    <h2>History</h2>
+    <% if (allUrls.length > 0) { %>
+    <table>
+        <thead>
+            <tr>
+                <th>S. No.</th>
+                <th>ORIGINAL URL</th>
+                <th>SHORT URL</th>
+                <th>Visit Count</th>
+            </tr>
+        </thead>
+        <tbody>
+           <% allUrls.forEach((url,i)=>{ %>
+                <tr>
+                    <td><%= i+1 %></td>
+                    <td><a href="<%= url.originalUrl %>" target="_blank"><%= url.originalUrl %></a></td>
+                    <td><a href="<%= url.shortUrl %>" target="_blank"><%= fullUrl%>/<%= url.shortUrl %></a></td>
+                    <td><%=url.visitCount %></td>
+                </tr>
+          <% }) %>
+        </tbody>
+    </table>
+    <% } else { %>
+        <p>Empty</p>
+        <% } %>
+</body>
+</html>
