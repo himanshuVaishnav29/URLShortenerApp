@@ -50,22 +50,12 @@ app.get("/:shortUrl", async (req, res) => {
     if(!x){
         return res.status(400);
     }
-//     x.visitCount++;
-//    x.save();
-   
-//    const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-//    const allUrls=await URL.find({});
-//    res.render('index',{
-//        allUrls:allUrls,
-//        fullUrl:fullUrl
-//    });
    res.redirect(x.originalUrl);
 });
 
 
 app.delete("/urls", async (req, res) => {
     try {
-        // Use Mongoose's deleteMany method to delete all entries
         await URL.deleteMany({});
         res.status(200).json({ message: "All entries deleted successfully" });
     } catch (error) {
