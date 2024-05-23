@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+    <%-include("./partials/header")%>
+    <title>Home Page</title>
+    <style>
+        body{
+            background: linear-gradient(91.7deg, rgb(50, 25, 79) -4.3%, rgb(122, 101, 149) 101.8%);
+            /* overflow-x: hidden; */
+        }
+        #container{
+            font-family: Arial, sans-serif;
+            background: linear-gradient(91.7deg, rgb(50, 25, 79) -4.3%, rgb(122, 101, 149) 101.8%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            /* width: 100vw; */
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: calc(100% - 82px); /* Adjusted for button width and margin */
+            margin-right: 10px;
+            padding: 10px 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            /* background-color: #007bff; */
+            background-color: #4f3b78;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .whiteFont{
+            color: white;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            /* background-color: #fff; */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            /* color: #007bff; */
+            color: black;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+
+        .search-container {
+            display: flex;
+            width: 100%;
+            /* background-color: #f1f1f1; */
+            
+            background-color: #4f3b78;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        #searchInput {
+            padding: 10px 20px;
+            border: none;
+            font-size: 16px;
+            /* background-color: #f1f1f1;  */
+            background-color: #4f3b78;
+            outline: none; 
+            width: 100%; 
+            transition: 0.3s ease-in-out; 
+        }
+
+        #searchInput:focus {
+            background-color: #fff; 
+        }
+
+        
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #4CAF50; 
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease-in-out    ;
+        }
+
+        button:hover {
+             background-color: #3e8e41; 
+        }
+
+        .fas.fa-search {
+        font-size: 18px;
+        }
+        td.original-url {
+            max-width: 300px; 
+            overflow-x: auto; 
+            scrollbar-width: thin;
+            white-space: nowrap; 
+        }
+        .inputFieldColor{
+            /* background: radial-gradient(circle at 0% 0.5%, rgb(241, 241, 242) 0.1%, rgb(224, 226, 228) 100.2%); */
+            /* background-color: #dcd6f7; */
+            background-color: #c4bbf0;
+
+        }
+        .tableHeaderColor{
+            background-color: #927fbf;
+        }
+        .delete-confirmation-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgb(234, 159, 159);
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            z-index: 10; 
+        }
+
+        
+        .delete-confirmation-popup.show {
+            display: block;
+        }
+        #tableContainer{
+            width: 100%;
+        }
+        
+
+        @media only screen and (max-width: 767px) {
+        
+        .table-responsive {
+            overflow-x: auto;
+        }
+        
+
+      
+        .table tr {
+            display: flex;
+            flex-wrap: wrap;
+            line-height: 1.5;
+        }
+
+        
+        .tableHeaderColor, .tableHeaderColor a {
+            font-weight: bold;
+            text-align: left;
+            flex: 1; 
+            padding: 5px; 
+        }
+
+        
+        .delete-confirmation-popup {
+            display: none;
+        }
+        }
+
+       
+        @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .table tr {
+            display: flex;
+            flex-wrap: wrap;
+            line-height: 1.5;
+        }
+
+        .tableHeaderColor, .tableHeaderColor a {
+            font-weight: bold;
+            text-align: left;
+            flex: 1;
+            padding: 5px;
+        }
+        }
+
+
+    </style>
+</head>
+<body>
+ 
+    <%-include('./partials/navBar')%>
+    
+    
+    <div id="container">
+    <h1 class="whiteFont">URL SHORTENER</h1>
+    <form action="/saveUrl" method="POST">
+        <div class="search-container inputFieldColor">
+            <input type="text" id="urlInputBox" name="originalUrl" placeholder="Enter URL" class="inputFieldColor" required>
+            <button type="submit">SHRINK</i></button>
+      </div>
+    </form>
+    <h2 class="whiteFont">History</h2>
+    <% if (allUrls.length > 0) { %>
+    <div id="tableContainer">
+    <table  class="inputFieldColor table-responsive">
+        <thead>
+            <tr>
+                <th class="tableHeaderColor">S. No.</th>
+                <th class="tableHeaderColor">ORIGINAL URL</th>
+                <th class="tableHeaderColor">SHORT URL</th>
+                <th class="tableHeaderColor">Visit Count</th>
+                <th class="tableHeaderColor">ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+           <% allUrls.forEach((url,i)=>{ %>
+                <tr>
+                    <td><%= i+1 %></td>
+                    <td class="original-url"><a href="<%= url.originalUrl %>" target="_blank"><%= url.originalUrl %></a></td>
+                    <td><a href="<%= url.shortUrl %>" target="_blank"><%= fullUrl%>/<%= url.shortUrl %></a></td>
+                    <td><%=url.visitCount %></td>
+                    <td><button class="btn btn-danger delete-btn" data-url-id="<%= url._id %>">DELETE</button></td>
+                        <div class="delete-confirmation-popup" data-url-id="<%= url._id %>">
+                          <form action="/delete/<%= url._id %>" method="POST">
+                            <h5 style="color: black;">Are you sure you want to delete this link?</h5>
+                            <button type="submit" class="btn btn-danger confirm-delete">Confirm</button>
+                            <button type="button" class="btn btn-secondary cancel-delete">Cancel</button>
+                          </form>
+                        </div>
+                </tr>
+          <% }) %>
+        </tbody>
+    </table>
+</div>
+    <% } else { %>
+        <p>Add your Short URL's, to see your history</p>
+        <% } %>
+
+    </div>
+    <%-include('./partials/scripts')%>
+    <script>
+        const deleteButtons = document.querySelectorAll('.delete-btn');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                const urlId = event.target.dataset.urlId; 
+                const popup = document.querySelector(`.delete-confirmation-popup[data-url-id="${urlId}"]`); 
+                if (popup) {
+                    popup.classList.add('show'); 
+                    document.body.classList.add('backgroundBlur');
+                }
+            });
+        });
+        const cancelButtons = document.querySelectorAll('.cancel-delete');
+        cancelButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault();
+                const closestPopup = button.closest('.delete-confirmation-popup');
+                if (closestPopup) {
+                    closestPopup.classList.remove('show'); 
+                    document.body.classList.remove('backgroundBlur');
+                }
+            });
+        });
+     </script>
+</body>
+</html>

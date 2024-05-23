@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%-include("./partials/header")%>
+    <title>HOME</title>
+</head>
+<body>
+    <%-include('./partials/navBar')%>
+  
+    <div style="display: flex; align-items: center; justify-content: center; height: 90vh;">
+    <section class="bsb-hero-1 px-3 bsb-overlay bsb-hover-pull" style="background-image: url('./assets/img/hero-img-1.jpg');">
+        <div class="container">
+          <div class="row justify-content-md-center">
+            <div class="col-12 col-md-11 col-lg-9 col-xl-7 col-xxl-6 text-center text-white">
+              <h3 class="display-3 fw-bold mb-3">URLs that drag? We snip the lag!</h3>
+              <p class="lead mb-5">
+                Simplify your online experience by transforming long, cumbersome URLs into short, easy-to-share links.              </p>
+              <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <button type="button" class="btn bsb-btn-3xl btn-light gap-3">Secured Links</button>
+                <button type="button" class="btn bsb-btn-3xl btn-outline-light">0 Cost</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+        
+
+    <%-include('./partials/scripts')%>
+</body>
+</html>
